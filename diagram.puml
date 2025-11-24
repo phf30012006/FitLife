@@ -1,0 +1,100 @@
+@startuml FitLifeDomain
+
+skinparam classAttributeIconSize 0
+skinparam classFontSize 14
+skinparam classAttributeFontSize 12
+skinparam classBackgroundColor #EEF5FF
+skinparam classBorderColor #3A6EA5
+skinparam shadowing true
+
+package "Domain.Entities" {
+
+    class Usuario {
+        + Id : int
+        + Nome : string
+        + Email : string
+        + Peso : double
+        + Altura : double
+    }
+
+    class RegistroAlimentacao {
+        + Id : int
+        + Alimento : string
+        + Calorias : int
+        + Proteinas : double
+        + Carboidratos : double
+        + Gorduras : double
+        + UsuarioId : int
+        + DataRegistro : DateTime
+    }
+
+    class Habito {
+        + Id : int
+        + Nome : string
+        + Descricao : string
+        + Frequencia : string
+        + UsuarioId : int
+        + DataInicio : DateTime
+    }
+
+    class RegistroHabito {
+        + Id : int
+        + HabitoId : int
+        + Concluido : bool
+        + Observacao : string?
+        + Data : DateTime
+    }
+
+    abstract class Treino {
+        + Id : int
+        + Nome : string
+        + Descricao : string
+        + Duracao : int
+        + UsuarioId : int
+        + DataCriacao : DateTime
+        {abstract} CalcularCalorias() : int
+    }
+
+    class TreinoCardio {
+        + DistanciaKm : double
+        + FrequenciaCardiacaMedia : int
+        <<override>> CalcularCalorias() : int
+    }
+
+    class TreinoMusculacao {
+        + GrupoMuscular : string
+        + Series : int
+        + Repeticoes : int
+        + CargaKg : double
+        <<override>> CalcularCalorias() : int
+    }
+}
+
+' ----- RELACIONAMENTOS -----
+
+' Usuário 1 - N Registros Alimentação
+Usuario "1" o-- "N" RegistroAlimentacao : Registros
+
+' Usuário 1 - N Hábitos
+Usuario "1" o-- "N" Habito : Habitos
+
+' Usuário 1 - N Treinos
+Usuario "1" o-- "N" Treino : Treinos
+
+' Hábito 1 - N Registros de Hábito
+Habito "1" o-- "N" RegistroHabito : Registros
+
+' RegistroHabito -> Habito
+RegistroHabito --> Habito
+
+' RegistroAlimentacao -> Usuario
+RegistroAlimentacao --> Usuario
+
+' Treino -> Usuario
+Treino --> Usuario
+
+' Herança dos treinos
+Treino <|-- TreinoCardio
+Treino <|-- TreinoMusculacao
+
+@enduml
