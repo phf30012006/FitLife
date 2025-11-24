@@ -60,6 +60,26 @@ public class TreinosController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = treino.Id }, treino);
     }
 
+    [HttpPut("cardio/{id}")]
+    public async Task<IActionResult> UpdateCardio(int id, UpdateTreinoCardioDto dto)
+    {
+        var result = await _treinoService.UpdateTreinoCardioAsync(id, dto);
+        if (!result)
+            return NotFound();
+
+        return NoContent();
+    }
+
+    [HttpPut("musculacao/{id}")]
+    public async Task<IActionResult> UpdateMusculacao(int id, UpdateTreinoMusculacaoDto dto)
+    {
+        var result = await _treinoService.UpdateTreinoMusculacaoAsync(id, dto);
+        if (!result)
+            return NotFound();
+
+        return NoContent();
+    }
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {

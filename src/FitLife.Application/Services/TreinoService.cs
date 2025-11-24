@@ -127,6 +127,42 @@ public class TreinoService : ITreinoService
         };
     }
 
+    public async Task<bool> UpdateTreinoCardioAsync(int id, UpdateTreinoCardioDto dto)
+    {
+        var treino = await _context.Treinos.FindAsync(id);
+        if (treino == null || treino is not TreinoCardio) return false;
+
+        var treinoCardio = (TreinoCardio)treino;
+        treinoCardio.Nome = dto.Nome;
+        treinoCardio.Descricao = dto.Descricao;
+        treinoCardio.Duracao = dto.Duracao;
+        treinoCardio.DistanciaKm = dto.DistanciaKm;
+        treinoCardio.FrequenciaCardiacaMedia = dto.FrequenciaCardiacaMedia;
+
+        _context.Treinos.Update(treinoCardio);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+
+    public async Task<bool> UpdateTreinoMusculacaoAsync(int id, UpdateTreinoMusculacaoDto dto)
+    {
+        var treino = await _context.Treinos.FindAsync(id);
+        if (treino == null || treino is not TreinoMusculacao) return false;
+
+        var treinoMusculacao = (TreinoMusculacao)treino;
+        treinoMusculacao.Nome = dto.Nome;
+        treinoMusculacao.Descricao = dto.Descricao;
+        treinoMusculacao.Duracao = dto.Duracao;
+        treinoMusculacao.GrupoMuscular = dto.GrupoMuscular;
+        treinoMusculacao.Series = dto.Series;
+        treinoMusculacao.Repeticoes = dto.Repeticoes;
+        treinoMusculacao.CargaKg = dto.CargaKg;
+
+        _context.Treinos.Update(treinoMusculacao);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+
     public async Task<bool> DeleteAsync(int id)
     {
         var treino = await _context.Treinos.FindAsync(id);

@@ -49,6 +49,16 @@ public class AlimentacaoController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = registro.Id }, registro);
     }
 
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(int id, UpdateRegistroAlimentacaoDto dto)
+    {
+        var result = await _alimentacaoService.UpdateAsync(id, dto);
+        if (!result)
+            return NotFound();
+
+        return NoContent();
+    }
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {

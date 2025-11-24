@@ -39,6 +39,16 @@ public class HabitosController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = habito.Id }, habito);
     }
 
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(int id, UpdateHabitoDto dto)
+    {
+        var result = await _habitoService.UpdateAsync(id, dto);
+        if (!result)
+            return NotFound();
+
+        return NoContent();
+    }
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {

@@ -8,5 +8,6 @@ public interface IRegistroAlimentacaoService
     Task<IEnumerable<RegistroAlimentacaoDto>> GetByUsuarioIdAsync(int usuarioId);
     Task<IEnumerable<RegistroAlimentacaoDto>> GetByUsuarioAndPeriodoAsync(int usuarioId, DateTime dataInicio, DateTime dataFim);
     Task<RegistroAlimentacaoDto> CreateAsync(CreateRegistroAlimentacaoDto dto);
+    Task<bool> UpdateAsync(int id, UpdateRegistroAlimentacaoDto dto);
     Task<bool> DeleteAsync(int id);
 }

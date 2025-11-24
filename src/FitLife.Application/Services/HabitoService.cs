@@ -72,6 +72,20 @@ public class HabitoService : IHabitoService
         };
     }
 
+    public async Task<bool> UpdateAsync(int id, UpdateHabitoDto dto)
+    {
+        var habito = await _context.Habitos.FindAsync(id);
+        if (habito == null) return false;
+
+        habito.Nome = dto.Nome;
+        habito.Descricao = dto.Descricao;
+        habito.Frequencia = dto.Frequencia;
+
+        _context.Habitos.Update(habito);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+
     public async Task<bool> DeleteAsync(int id)
     {
         var habito = await _context.Habitos.FindAsync(id);

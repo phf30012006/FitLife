@@ -98,6 +98,22 @@ public class RegistroAlimentacaoService : IRegistroAlimentacaoService
         };
     }
 
+    public async Task<bool> UpdateAsync(int id, UpdateRegistroAlimentacaoDto dto)
+    {
+        var registro = await _context.RegistrosAlimentacao.FindAsync(id);
+        if (registro == null) return false;
+
+        registro.Alimento = dto.Alimento;
+        registro.Calorias = dto.Calorias;
+        registro.Proteinas = dto.Proteinas;
+        registro.Carboidratos = dto.Carboidratos;
+        registro.Gorduras = dto.Gorduras;
+
+        _context.RegistrosAlimentacao.Update(registro);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+
     public async Task<bool> DeleteAsync(int id)
     {
         var registro = await _context.RegistrosAlimentacao.FindAsync(id);
