@@ -8,7 +8,7 @@ FitLife é uma plataforma para gerenciar treinos, alimentação e hábitos saud�
 Este projeto utiliza **Clean Architecture** com as seguintes camadas:
 
 ### 1. Domain Layer (`FitLife.Domain`)
-- **Responsabilidade**: Entidades de negócio e interfaces de repositório
+- **Responsabilidade**: Entidades de negócio
 - **Características**:
   - Sem dependências externas
   - Classes de polimorfismo para tipos de treino (Cardio, Musculação)
@@ -26,7 +26,6 @@ Este projeto utiliza **Clean Architecture** com as seguintes camadas:
 ### 3. Infrastructure Layer (`FitLife.Infrastructure`)
 - **Responsabilidade**: Acesso a dados e implementações técnicas
 - **Características**:
-  - Implementação de repositórios
   - DbContext do Entity Framework Core
   - SQL Server como banco de dados
   - Configuração de relacionamentos e índices
