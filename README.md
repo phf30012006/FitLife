@@ -4,7 +4,7 @@
 FitLife é uma plataforma para gerenciar treinos, alimentação e hábitos saudáveis. Os usuários podem registrar seu progresso e receber sugestões personalizadas.
 
 ## Integrantes do Grupo
-- **Paulo Henrique Fusco**: 2011245
+- **Paulo Henrique Fusco** - 2011245
 - **Guilherme Lopes Bertacini** - 2011593
 - **Bruno Bortoleto** - 1988424
 - **André Luís de Souza Santos** - 1987372
